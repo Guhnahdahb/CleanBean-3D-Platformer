@@ -2,7 +2,7 @@
 
 
 
-> **Current version: 0.5** — Core movement and juice. Version 1.0 will add advanced traversal. See roadmap
+> **v0.5** — Core movement and juice. Version 1.0 will add advanced traversal. See roadmap
 
 ## Overview
 
