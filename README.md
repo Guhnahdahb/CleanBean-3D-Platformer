@@ -1,4 +1,10 @@
 <p align="center">
+  <picture>
+    <img src="icon.png" alt="Gameplay preview" width="700">
+  </picture>
+</p>
+
+<p align="center">
 
   <!-- [REPLACE: Add your logo or a stylized text banner image here] -->
 
