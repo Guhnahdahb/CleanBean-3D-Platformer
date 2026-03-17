@@ -7,7 +7,7 @@
 <h3 align="center">A simple yet elegant 3D Platformer Template for Unreal Engine 5.</h3>
 
 ---
-
+These links aren't currently working. WIP. Give me a min.
 <p align="center">
   <a href="https://www.fab.com"><img src="https://img.shields.io/badge/Get%20it%20on%20Fab-1a2230?style=for-the-badge&logo=unrealengine&logoColor=00e5ff" alt="Fab"></a>&nbsp;&nbsp;
   <a href="https://github.com/YOUR-USERNAME/YOUR-REPO-NAME/releases/latest"><img src="https://img.shields.io/badge/Download%20Demo-1a2230?style=for-the-badge&logo=windows&logoColor=white" alt="Demo"></a>&nbsp;&nbsp;
