@@ -1,6 +1,6 @@
 <p align="center">
   <picture>
-    <img src="icon.png" alt="Gameplay preview" width="700">
+    <img src="icon.png" alt="Gameplay preview" width="100%">
   </picture>
 </p>
 
