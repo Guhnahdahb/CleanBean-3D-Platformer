@@ -10,9 +10,10 @@
 
 <p align="center">
   <a href="https://www.fab.com"><img src="https://img.shields.io/badge/Get%20it%20on%20Fab-1a2230?style=for-the-badge&logo=unrealengine&logoColor=00e5ff" alt="Fab"></a>&nbsp;&nbsp;
-  <a href="[https://github.com/YOUR-USERNAME/YOUR-REPO-NAME/releases/latest](https://github.com/Guhnahdahb/CleanBean-3D-Platformer/releases/tag/v0.5)"><img src="https://img.shields.io/badge/Download%20Demo-1a2230?style=for-the-badge&logo=windows&logoColor=white" alt="Demo"></a>&nbsp;&nbsp;
-  <a href="[https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/](https://guhnahdahb.github.io/CleanBean-3D-Platformer/#/)"><img src="https://img.shields.io/badge/Documentation-1a2230?style=for-the-badge&logo=gitbook&logoColor=white" alt="Docs"></a>
+  <a href="https://github.com/Guhnahdahb/CleanBean-3D-Platformer/releases"><img src="https://img.shields.io/badge/Download%20Demo-1a2230?style=for-the-badge&logo=windows&logoColor=white" alt="Demo"></a>&nbsp;&nbsp;
+  <a href="https://guhnahdahb.github.io/CleanBean-3D-Platformer/#/"><img src="https://img.shields.io/badge/Documentation-1a2230?style=for-the-badge&logo=gitbook&logoColor=white" alt="Docs"></a>
 </p>
+
 
 <br>
 
