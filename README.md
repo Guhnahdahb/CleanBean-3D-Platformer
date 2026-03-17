@@ -9,9 +9,9 @@
 ---
 
 <p align="center">
-  <a href="https://www.fab.com"><img src="https://img.shields.io/badge/Get_it_on-Fab-00e5ff?style=for-the-badge" alt="Available on Fab"></a>&nbsp;&nbsp;
-  <a href="https://github.com/YOUR-USERNAME/YOUR-REPO-NAME/releases/latest"><img src="https://img.shields.io/badge/Download-Demo-1a2230?style=for-the-badge" alt="Download Demo"></a>&nbsp;&nbsp;
-  <a href="https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/"><img src="https://img.shields.io/badge/Read_the-Docs-1a2230?style=for-the-badge" alt="Documentation"></a>
+  <a href="https://www.fab.com"><img src="https://img.shields.io/badge/Get%20it%20on%20Fab-00e5ff?style=for-the-badge&logo=unrealengine&logoColor=white" alt="Fab"></a>&nbsp;&nbsp;
+  <a href="https://github.com/YOUR-USERNAME/YOUR-REPO-NAME/releases/latest"><img src="https://img.shields.io/badge/Download%20Demo-1a2230?style=for-the-badge&logo=windows&logoColor=white" alt="Demo"></a>&nbsp;&nbsp;
+  <a href="https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/"><img src="https://img.shields.io/badge/Documentation-1a2230?style=for-the-badge&logo=gitbook&logoColor=white" alt="Docs"></a>
 </p>
 
 <br>
