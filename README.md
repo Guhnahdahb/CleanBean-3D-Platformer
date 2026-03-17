@@ -4,17 +4,6 @@
   </picture>
 </p>
 
-<p align="center">
-
-  <!-- [REPLACE: Add your logo or a stylized text banner image here] -->
-
-  <!-- <img src="images/banner.png" alt="3D Platformer Template" width="800"> -->
-
-</p>
-<h1 align="center">3D Platformer Template</h1>
-
-<p align="center">
-
   <strong>A snappy, juice-packed 3D platformer controller for Unreal Engine.</strong><br>
 
   Procedural animations. Punchy SFX. Particles on everything. No humanoid rig required.
