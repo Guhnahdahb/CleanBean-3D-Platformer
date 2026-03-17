@@ -21,7 +21,7 @@
 
 A ready-to-use 3D platformer character controller built for Unreal Engine 5. It's designed around one principle: **movement should feel good.**
 
-Just a simple bean character driven entirely by procedural animations — and it feels alive. The controller is snappy and responsive with just enough weight to feel grounded, paired with particles, screen-ready SFX, and visual feedback on every action.
+Just a simple bean character driven by procedural "animations." The controller is snappy and responsive with just enough weight to feel grounded, paired with particles and visual feedback.
 
 ---
 
