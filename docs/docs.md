@@ -1,217 +1,97 @@
-# 3D Platformer Template
+# Documentation for CleanBean 3D Platformer
 
-Documentation for the 3D Platformer Template for Unreal Engine.
 
-[🛒 Fab Listing](#) | [🎮 Download Demo](https://github.com/YOUR-USERNAME/YOUR-REPO-NAME/releases/latest) | [💬 Discord](#) | [📦 GitHub](https://github.com/YOUR-USERNAME/YOUR-REPO-NAME)
 
-> **Current version: 0.5** — Core movement and juice. Version 1.0 will add advanced traversal. [See roadmap →](#roadmap)
+> **Current version: 0.5** — Core movement and juice. Version 1.0 will add advanced traversal. See roadmap
 
 ## Overview
 
-A game-ready 3D platformer controller built around one thing: **how it feels in your hands.** Responsive controls, procedural animations, particle effects, and sound design — all without requiring a humanoid character rig or pre-made animations. Drop it in and start building levels.
-
-<!-- Add a screenshot or GIF here:
-![Gameplay preview](images/preview.gif)
--->
+A game-ready 3D platformer controller built around one thing: **how it feels in your hands.** Responsive controls, procedural animations, particle effects, and sound design — all without requiring a humanoid character rig or pre-made animations. 
 
 ## Requirements
 
-| Requirement | Details |
-|---|---|
-| Engine Version | Unreal Engine 5.6+ |
-| Plugins | None required |
-| Project Type | Blueprint-only or C++ |
-| Platform | Windows (Mac/Linux untested) |
-| Input | Keyboard, Mouse, Gamepad |
-| Multiplayer | Not supported |
+Unreal engine 5.6+.
 
-## Installation & Setup
+## Design Philosophy
 
-<!-- UPDATE THESE STEPS TO MATCH YOUR ACTUAL PROCESS -->
+My intent with this project is to keep things really simply but still have a good feeling player controller. I use this even when not making a 3D platformer. It's a good way to test out multiple different levels or game systems with a simple character controller. 
 
-**1. Install from Fab**
+It's built using the default Unreal Engine Character Movement Component (CMC). This is great for a lot of reason, and not so great for a few. A lot of custom movement has to fight against the CMC. Ideally for an in depth or completely custom movement system, it would be built up from the ground up. For simplicity and familiarity, I decided to stick with CMC for this.
 
-Purchase and install the asset from the Fab Marketplace. Content appears in your Content Browser under `Content/YourFolderName`.
+## Specific things of note for this project
 
-**2. Open the Example Map**
-
-Navigate to `Content/YourFolderName/Maps/` and open the included example map. Hit Play to test.
-
-**3. Use in Your Own Level**
-
-Place `BP_PlatformerCharacter` into your scene and set it as the Default Pawn in your Game Mode. All effects and sounds are wired up automatically.
-
-**4. Configure**
-
-Select the character and check the Details panel. All parameters are exposed under labeled categories. See [Configuration](#configuration).
-
-<!-- FILL IN: mention Enhanced Input / Input Mapping Context if applicable -->
-
-## Movement
-
-### Run
-
-Standard ground movement with configurable max speed and acceleration. The character responds to input almost instantly with a subtle acceleration curve that adds weight.
-
-<!-- FILL IN: details about your acceleration, sprint, etc. -->
-
-### Jump
-
-A single press launches the character with a punchy upward impulse. Gravity is increased on the downward arc for more satisfying arcs and better control at the peak.
-
-<!-- FILL IN: coyote time, jump buffering if applicable -->
-
-### Double Jump
-
-A second jump mid-air with its own independent force value, tunable separately from the first jump.
-
-<!-- FILL IN: does it reset velocity? Can you double jump after walking off a ledge? -->
+A few spring arms are used in the player blueprint. This isn't standard for characters, and I'm not using them in a typical way. Spring Arms are typically meant for cameras. They use arm length, target offset and a few other things. The main thing I use is "Enable Camera Lag" and "Enable Camera Rotation Lag." It's a type of short cut to apply some smoothing to the character movement and it's different components. Most of the components are child-ed under the "Visuals Spring Arm." With camera lag enabled on this spring arm, the visual part of the characters slightly lags (smooths) behind the true player capsule. Visually, this makes things like the landing, sliding (yet to be implemented) and even idle bob and walking bob smoother without writing a bunch of extra code or using a ton of timelines to smooth everything out. It's performant and a simple way to implement smoothing in a lot of ways.
 
 ## Procedural Animations
 
-All character motion is driven procedurally in real time. No animation Blueprints, state machines, or blend trees.
+### Idle Bob and Movement Bob
 
-<!-- FILL IN: brief explanation of how the system works technically -->
+The bobbing "animation" is really just a scaling value of the visuals spring arm. Depending on the players horizontal speed, it scales the speed of the timeline played that controls it's Z scale value.
 
-### Forward Tilt
+### Forward tilt and L/R lean
 
-Character tilts forward when running, proportional to speed. Gives a natural sense of momentum.
+All character motion is driven in real time. It is called on event tick. You may have heard to never use Event tick, and that's simply not true. There are use cases for it, but obviously building everything off of Event Tick is a bad idea and bad practice. In the CleanBean 3D, only what needs to be is off Event Tick. 
 
-### Directional Lean
-
-Character leans into strafes and turns. Lean angle, speed, and smoothing are all configurable.
+Essentially what this means for the bean is it calculates the players horizontal velocity, and applies a rotational effect depending on the local orientation of the bean. 
 
 ### Squash & Stretch
 
-Squashes on land, stretches on launch. Classic platformer juice.
-
-### Using Your Own Mesh
-
-The system operates on root component transforms, not bones. Swap in any mesh — static or skeletal — and it still works.
-
-<!-- FILL IN: any gotchas, pivot requirements, etc. -->
+When jumping and landing, it sets the spring Arm Target variable. This variable is fed into a function that is always trying to smooth two vectors together. In this case, the two vectors that are being smoothed are the Spring arm Target and the beans actual scale. The end results is smooth interpolation of the bean, regardless of it's value. In extreme cases, the interp value might be too small, but there aren't many extreme cases so I've omitted a solution to this for now.
 
 ## Particles & VFX
 
 All particle systems are included and trigger automatically.
 
-- **Jump Burst** — Fires from the character's feet on jump
-- **Land Impact** — Plays on landing, scaled to fall distance
-- **Walk Dust** — Subtle trails during ground movement
-
-<!-- FILL IN: Niagara or Cascade? How to customize colors/scale? How to swap for custom effects? -->
-
+They are all based from simple Niagara particle systems that render 3D meshes of circle and emit them based on distance or space.
 ## Sound Effects
 
-Every action has audio feedback. Included SFX are punchy and genre-neutral.
+Most things have sound effects.
+"Footsteps" (the bean doesn't have feet), jump, and land. 
 
-- **Footsteps** — Rhythmic, synced to movement speed
-- **Jump SFX** — Sharp launch sound
-- **Land SFX** — Weighted thud on landing
-
-<!-- FILL IN: how are footsteps triggered? How to swap in custom sounds? -->
-
-## Character
-
-A simple bean/capsule mesh with no humanoid rig required. Replace it with your own model — the procedural system works with any mesh since it animates the root transform, not bones.
-
-<!-- FILL IN: collision setup, default dimensions, mesh swap steps, material customization -->
-
-## Configuration
-
-All parameters are exposed in the character Blueprint's Details panel.
-
-<!-- FILL IN: replace with your actual parameter names and default values -->
-
-### Movement
-
-| Parameter | Description | Default |
-|---|---|---|
-| `MaxSpeed` | Maximum ground speed | `000` |
-| `Acceleration` | How quickly the character reaches max speed | `000` |
-| `Deceleration` | How quickly the character stops | `000` |
-| `GroundFriction` | Friction during ground movement | `000` |
-| `AirControl` | Steering control while airborne | `000` |
-
-### Jump
-
-| Parameter | Description | Default |
-|---|---|---|
-| `JumpForce` | Upward impulse on jump | `000` |
-| `DoubleJumpForce` | Upward impulse on double jump | `000` |
-| `FallGravityMultiplier` | Extra gravity when falling | `000` |
-| `CoyoteTime` | Grace period after leaving a ledge | `000` |
-| `JumpBuffer` | Input buffer window before landing | `000` |
-
-### Animation
-
-| Parameter | Description | Default |
-|---|---|---|
-| `TiltAngle` | Max forward tilt in degrees | `000` |
-| `LeanAngle` | Max lean angle in degrees | `000` |
-| `LeanSpeed` | How quickly lean responds | `000` |
-| `SquashIntensity` | Compression on land | `000` |
-| `StretchIntensity` | Stretch on jump | `000` |
-
-### Effects & Sound
-
-| Parameter | Description | Default |
-|---|---|---|
-| `ParticleScale` | Scale of all particle effects | `000` |
-| `FootstepFrequency` | How often footsteps play | `000` |
-| `SFXVolume` | Volume of all sound effects | `000` |
-| `LandImpactThreshold` | Min fall distance for land effects | `000` |
+`At this time, I'm aware of a bug with the visual dust and sound footstep going off even if the bean is in the air. This will be fixed in the next update.`
 
 ## Roadmap
 
-**Planned for v1.0:**
+**Planned for v0.6**
+	Collectable / Pick-up item class
 
-| Feature | Description | Status |
-|---|---|---|
-| Wall Running | Run along vertical surfaces with auto-detection | 🔲 Planned |
-| Wall Jumping | Launch off walls with directional control | 🔲 Planned |
-| Vaulting | Automatic vault over low obstacles | 🔲 Planned |
-| Ground Slam | Mid-air downward slam with impact VFX | 🔲 Planned |
-| Grinding | Rail grinding with speed mechanics | 🔲 Planned |
+**Planned for v1.0:**
+	- Wall running
+	- Wall jumping
+	- Vaulting
+	- Ground slam
 
 > **All updates are free** for existing owners.
 
-<!-- Status key: ✅ Complete · 🔧 In Progress · 🔲 Planned -->
-
 ## Changelog
 
-### v0.5 — Initial Release <!-- · FILL IN: Date -->
+### v0.5 — Initial Release 
 
 - Core movement system: run, jump, double jump
 - Procedural animations: forward tilt, directional lean, squash and stretch
 - Particle effects: jump burst, land impact, walk dust
 - Sound effects: footsteps, jump SFX, land SFX
 - Bean character mesh with customizable material
-- All parameters exposed in Blueprint Details panel
 - Example demo level
 
 ## FAQ
 
 **Can I use my own character mesh?**
-Yes. Swap in any static or skeletal mesh. The procedural system works on root transforms, not bones.
+Yes. Swap in any static or skeletal mesh. The procedural system works on root transforms, not bones. That means if you want actual animations, other animation solutions will be needed.
 
 **Does this work with multiplayer?**
-Not currently. Single-player only.
+Not currently. Single-player only. Because of the simplicity of the system, I'm considering coding for multiplayer, but at this time it's not planned.
 
 **What engine versions are supported?**
-UE 5.6+. Earlier versions untested.
+UE 5.6+. Earlier versions untested, although I don't see many conflicts since I'm not using any fancy 5.6+ features.
 
 **Will v1.0 features be free?**
 Yes. All updates are free for existing owners.
-
-<!-- Add more FAQ entries as you get support questions -->
 
 ## Support
 
 Having issues or found a bug?
 
-- 💬 **Discord:** [Join the server](#)
-- 📧 **Email:** [your@email.com](mailto:your@email.com)
-- 🛒 **Fab:** Questions tab on the [store listing](#)
+	Github repo [[https://github.com/Guhnahdahb/CleanBean-3D-Platformer/tree/main]]
 
-When reporting bugs, include your UE version, what happened, and steps to reproduce. Screenshots or video help a lot.
+
